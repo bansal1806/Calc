@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProCalc - Premium Calculator</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Math.js for robust engineering calculations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+    <!-- PWA Requirements -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="calculator" id="calculator">
+        <div class="header">
+            <span class="brand">ProCalc</span>
+            <div class="toggle-container">
+                <span class="mode-text" id="standardText">Standard</span>
+                <label class="switch">
+                    <input type="checkbox" id="modeToggle">
+                    <span class="slider round"></span>
+                </label>
+                <span class="mode-text" id="engineeringText">Engineering</span>
+            </div>
+        </div>
+
+        <div class="display">
+            <div class="expression" id="expression"></div>
+            <div class="result" id="result">0</div>
+        </div>
+
+        <div class="keypad">
+            <!-- Engineering Panel -->
+            <div class="eng-panel-container" id="engPanel">
+                <div class="eng-tabs">
+                    <button class="tab-btn active" data-tab="trig">Trig</button>
+                    <button class="tab-btn" data-tab="stats">Stats</button>
+                    <button class="tab-btn" data-tab="matrix">Matrix</button>
+                    <button class="tab-btn" data-tab="algebra">Algebra</button>
+                </div>
+                
+                <div class="eng-panel-content active" id="tab-trig">
+                    <button class="btn btn-eng btn-mode" data-action="toggle-deg" id="degBtn">DEG</button>
+                    <button class="btn btn-eng btn-memory" data-action="memory" data-value="mc">MC</button>
+                    <button class="btn btn-eng btn-memory" data-action="memory" data-value="mr">MR</button>
+                    <button class="btn btn-eng btn-memory" data-action="memory" data-value="m+">M+</button>
+                    
+                    <button class="btn btn-eng btn-memory" data-action="memory" data-value="m-">M-</button>
+                    <button class="btn btn-eng" data-action="math" data-value="sin(">sin</button>
+                    <button class="btn btn-eng" data-action="math" data-value="cos(">cos</button>
+                    <button class="btn btn-eng" data-action="math" data-value="tan(">tan</button>
+                    
+                    <button class="btn btn-eng" data-action="math" data-value="asin(">asin</button>
+                    <button class="btn btn-eng" data-action="math" data-value="acos(">acos</button>
+                    <button class="btn btn-eng" data-action="math" data-value="atan(">atan</button>
+                    <button class="btn btn-eng" data-action="math" data-value="pi">π</button>
+                    
+                    <button class="btn btn-eng" data-action="math" data-value="log10(">log</button>
+                    <button class="btn btn-eng" data-action="math" data-value="log(">ln</button>
+                    <button class="btn btn-eng" data-action="math" data-value="e">e</button>
+                    <button class="btn btn-eng" data-action="math" data-value="sqrt(">√</button>
+                    
+                    <button class="btn btn-eng" data-action="math" data-value="^2">x²</button>
+                    <button class="btn btn-eng" data-action="math" data-value="^">xʸ</button>
+                    <button class="btn btn-eng" data-action="math" data-value="!">x!</button>
+                    <button class="btn btn-eng" data-action="math" data-value="exp(">exp</button>
+                    
+                    <button class="btn btn-eng" data-action="math" data-value=" mod ">mod</button>
+                    <button class="btn btn-eng" data-action="math" data-value="%">%</button>
+                    <button class="btn btn-eng" data-action="math" data-value="^-1">1/x</button>
+                    <button class="btn btn-eng btn-memory" data-action="ans">ANS</button>
+                </div>
+                
+                <div class="eng-panel-content" id="tab-stats">
+                    <button class="btn btn-eng" data-action="math" data-value="mean(">mean</button>
+                    <button class="btn btn-eng" data-action="math" data-value="median(">med</button>
+                    <button class="btn btn-eng" data-action="math" data-value="std(">std</button>
+                    <button class="btn btn-eng" data-action="math" data-value="var(">var</button>
+
+                    <button class="btn btn-eng" data-action="math" data-value="max(">max</button>
+                    <button class="btn btn-eng" data-action="math" data-value="min(">min</button>
+                    <button class="btn btn-eng" data-action="math" data-value="sum(">sum</button>
+                    <button class="btn btn-eng" data-action="math" data-value=",">,</button>
+                    
+                    <button class="btn btn-eng" data-action="math" data-value="prod(">prod</button>
+                    <button class="btn btn-eng" data-action="math" data-value="mad(">mad</button>
+                    <button class="btn btn-eng" data-action="math" data-value="mode(">mode</button>
+                    <button class="btn btn-eng" data-action="math" data-value="[">[</button>
+
+                    <button class="btn btn-eng btn-memory" data-action="memory" data-value="mc">MC</button>
+                    <button class="btn btn-eng btn-memory" data-action="memory" data-value="mr">MR</button>
+                    <button class="btn btn-eng btn-memory" data-action="memory" data-value="m+">M+</button>
+                    <button class="btn btn-eng" data-action="math" data-value="]">]</button>
+                </div>
+
+                <div class="eng-panel-content" id="tab-matrix">
+                    <button class="btn btn-eng" data-action="math" data-value="[">[</button>
+                    <button class="btn btn-eng" data-action="math" data-value="]">]</button>
+                    <button class="btn btn-eng" data-action="math" data-value=",">,</button>
+                    <button class="btn btn-eng" data-action="math" data-value=";">;</button>
+                    
+                    <button class="btn btn-eng" data-action="math" data-value="det(">det</button>
+                    <button class="btn btn-eng" data-action="math" data-value="inv(">inv</button>
+                    <button class="btn btn-eng" data-action="math" data-value="trace(">tr</button>
+                    <button class="btn btn-eng" data-action="math" data-value="transpose(">Aᵀ</button>
+
+                    <button class="btn btn-eng" data-action="math" data-value="concat(">concat</button>
+                    <button class="btn btn-eng" data-action="math" data-value="cross(">cross</button>
+                    <button class="btn btn-eng" data-action="math" data-value="dot(">dot</button>
+                    <button class="btn btn-eng" data-action="math" data-value="size(">size</button>
+                    
+                    <button class="btn btn-eng" data-action="math" data-value="identity(">eye</button>
+                    <button class="btn btn-eng" data-action="math" data-value="zeros(">zeros</button>
+                    <button class="btn btn-eng" data-action="math" data-value="ones(">ones</button>
+                    <button class="btn btn-eng btn-memory" data-action="ans">ANS</button>
+                </div>
+
+                <div class="eng-panel-content" id="tab-algebra">
+                    <button class="btn btn-eng" data-action="math" data-value="x">x</button>
+                    <button class="btn btn-eng" data-action="math" data-value="y">y</button>
+                    <button class="btn btn-eng" data-action="math" data-value="z">z</button>
+                    <button class="btn btn-eng" data-action="math" data-value="=">=</button>
+                    
+                    <button class="btn btn-eng" data-action="math" data-value="f(x)=">f(x)=</button>
+                    <button class="btn btn-eng" data-action="math" data-value="f(">f(</button>
+                    <button class="btn btn-eng" data-action="math" data-value="g(">g(</button>
+                    <button class="btn btn-eng" data-action="math" data-value=";">;</button>
+                    
+                    <button class="btn btn-eng" data-action="math" data-value="simplify(">smpl</button>
+                    <button class="btn btn-eng" data-action="math" data-value="derivative(">d/dx</button>
+                    <button class="btn btn-eng" data-action="math" data-value=",">,</button>
+                    <button class="btn btn-eng btn-memory" data-action="clearVars">CLR V</button>
+                </div>
+            </div>
+
+            <!-- Standard Panel -->
+            <div class="std-panel">
+                <button class="btn btn-action" data-action="clear">AC</button>
+                <button class="btn btn-action" data-action="math" data-value="(">(</button>
+                <button class="btn btn-action" data-action="math" data-value=")">)</button>
+                <button class="btn btn-operator" data-action="math" data-value="/">÷</button>
+                
+                <button class="btn btn-number" data-action="number" data-value="7">7</button>
+                <button class="btn btn-number" data-action="number" data-value="8">8</button>
+                <button class="btn btn-number" data-action="number" data-value="9">9</button>
+                <button class="btn btn-operator" data-action="math" data-value="*">×</button>
+                
+                <button class="btn btn-number" data-action="number" data-value="4">4</button>
+                <button class="btn btn-number" data-action="number" data-value="5">5</button>
+                <button class="btn btn-number" data-action="number" data-value="6">6</button>
+                <button class="btn btn-operator" data-action="math" data-value="-">−</button>
+                
+                <button class="btn btn-number" data-action="number" data-value="1">1</button>
+                <button class="btn btn-number" data-action="number" data-value="2">2</button>
+                <button class="btn btn-number" data-action="number" data-value="3">3</button>
+                <button class="btn btn-operator" data-action="math" data-value="+">+</button>
+                
+                <button class="btn btn-number" data-action="number" data-value="0">0</button>
+                <button class="btn btn-number" data-action="number" data-value=".">.</button>
+                <button class="btn btn-action" data-action="delete"><i class="fa-solid fa-delete-left"></i></button>
+                <button class="btn btn-equals" data-action="calculate">=</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+    </script>
+</body>
+</html>
