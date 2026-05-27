@@ -1,4 +1,4 @@
-const CACHE_NAME = 'procalc-v1';
+const CACHE_NAME = 'procalc-v2';
 const urlsToCache = [
   './',
   './index.html',
@@ -9,7 +9,7 @@ const urlsToCache = [
   './icons/icon-512.png',
   'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js'
 ];
 
 self.addEventListener('install', event => {
