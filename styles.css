@@ -34,13 +34,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
+    padding: 20px;
 }
 
 /* Background Blobs for Premium Aesthetic */
 .background-blobs {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
