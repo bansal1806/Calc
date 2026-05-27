@@ -32,11 +32,11 @@ body {
     color: var(--text-primary);
     min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
-    padding: 20px;
+    padding: max(20px, env(safe-area-inset-top)) 20px max(40px, env(safe-area-inset-bottom)) 20px;
 }
 
 /* Background Blobs for Premium Aesthetic */
@@ -92,6 +92,7 @@ body {
 /* Calculator Container */
 .calculator {
     position: relative;
+    margin: auto;
     z-index: 10;
     background: var(--calc-bg);
     backdrop-filter: blur(24px);
