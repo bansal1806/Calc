@@ -105,7 +105,14 @@ body {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 
                 inset 0 1px 1px rgba(255, 255, 255, 0.1);
     transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 98vh;
+    scrollbar-width: none; /* Firefox */
+}
+
+.calculator::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
 }
 
 .calculator.engineering-mode {
